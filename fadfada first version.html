@@ -1,0 +1,2424 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>فضفضة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Amiri:ital@0;1&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #080810;
+            --bg2: #0d0d1a;
+            --surface: #111120;
+            --surface2: #181830;
+            --border: rgba(255, 255, 255, 0.07);
+            --text: #e8e8f4;
+            --muted: #6a6a8a;
+            --accent: #6060f8;
+            --accent2: #9a9aff;
+            --glow: rgba(96, 96, 248, 0.18);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            direction: rtl;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.18;
+        }
+
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #3030cc, transparent);
+            top: -250px;
+            right: -200px;
+            animation: drift 25s ease-in-out infinite;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #6a1a6a, transparent);
+            bottom: -200px;
+            left: -150px;
+            animation: drift 30s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(40px, -30px);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(8, 8, 16, 0.88);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--accent2);
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.88rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        .nav-btn.active {
+            color: var(--accent2);
+            background: rgba(96, 96, 248, 0.12);
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+            padding-top: 68px;
+        }
+
+        .page.active {
+            display: block;
+            animation: pageIn 0.45s ease;
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sec-header {
+            text-align: center;
+            padding: 2.5rem 1.5rem 1.5rem;
+        }
+
+        .sec-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent2);
+            background: rgba(96, 96, 248, 0.1);
+            border: 1px solid rgba(96, 96, 248, 0.2);
+            padding: 0.28rem 0.9rem;
+            border-radius: 50px;
+            margin-bottom: 0.8rem;
+        }
+
+        .sec-title {
+            font-family: 'Amiri', serif;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        .sec-desc {
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* LANDING */
+        .landing {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .landing.active {
+            display: flex;
+        }
+
+        .eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 0.28em;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+            animation: fadeUp 0.7s ease 0.2s both;
+        }
+
+        .hero-title {
+            font-family: 'Amiri', serif;
+            font-size: clamp(2.8rem, 8vw, 5.2rem);
+            line-height: 1.22;
+            margin-bottom: 1.2rem;
+            animation: fadeUp 0.7s ease 0.4s both;
+        }
+
+        .hero-title span {
+            color: var(--accent2);
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 440px;
+            line-height: 1.85;
+            margin-bottom: 2.8rem;
+            animation: fadeUp 0.7s ease 0.6s both;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--accent), #9050e8);
+            color: #fff;
+            border: none;
+            padding: 1rem 2.4rem;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 40px rgba(96, 96, 248, 0.3);
+            animation: fadeUp 0.7s ease 0.8s both;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(96, 96, 248, 0.45);
+        }
+
+        .landing-trust {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--muted);
+            white-space: nowrap;
+            animation: fadeUp 0.7s ease 1s both;
+        }
+
+        .tdots {
+            display: inline-flex;
+            gap: 0.3rem;
+            margin-right: 0.4rem;
+            vertical-align: middle;
+        }
+
+        .tdot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent2);
+            opacity: 0.5;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        .tdot:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .tdot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes dotPulse {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: scale(1.3);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CONFESSION */
+        .conf-wrap {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem 3rem;
+        }
+
+        .conf-prompt {
+            text-align: center;
+            font-family: 'Amiri', serif;
+            font-size: 1.05rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 1.3rem;
+        }
+
+        .conf-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .conf-box:focus-within {
+            border-color: rgba(96, 96, 248, 0.4);
+            box-shadow: 0 0 40px rgba(96, 96, 248, 0.08);
+        }
+
+        .conf-ta {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.08rem;
+            line-height: 1.9;
+            padding: 1.6rem;
+            min-height: 240px;
+            resize: none;
+            direction: rtl;
+        }
+
+        .conf-ta::placeholder {
+            color: #2a2a4a;
+        }
+
+        .char-c {
+            position: absolute;
+            bottom: 0.8rem;
+            left: 1rem;
+            font-size: 0.7rem;
+            color: var(--muted);
+            opacity: 0.4;
+        }
+
+        .pain-label {
+            font-size: 0.9rem;
+            color: var(--muted);
+            text-align: center;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .pain-opts {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pain-opt {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: all 0.22s;
+            text-align: center;
+            flex: 1;
+            min-width: 105px;
+            max-width: 150px;
+        }
+
+        .pain-opt:hover {
+            border-color: rgba(96, 96, 248, 0.3);
+            background: var(--surface2);
+        }
+
+        .pain-opt.sel {
+            border-color: var(--accent);
+            background: rgba(96, 96, 248, 0.1);
+        }
+
+        .pain-opt[data-lv="4"].sel {
+            border-color: #e0204a;
+            background: rgba(220, 32, 74, 0.08);
+        }
+
+        .pain-emoji {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .pain-txt {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .pub-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #12122a, #22123a);
+            border: 1px solid rgba(140, 90, 248, 0.3);
+            color: var(--accent2);
+            padding: 1rem;
+            border-radius: 14px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1.2rem;
+        }
+
+        .pub-btn:hover {
+            border-color: rgba(140, 90, 248, 0.6);
+            box-shadow: 0 0 30px rgba(96, 96, 248, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .pub-confirm {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .pub-confirm .ci {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .pub-confirm p {
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+
+        .pub-confirm strong {
+            color: var(--accent2);
+        }
+
+        /* WALL */
+        .wall-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem 3rem;
+        }
+
+        .wall-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .wcard {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.4rem;
+            position: relative;
+            transition: all 0.22s;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        .wcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            border-radius: 0 16px 16px 0;
+            opacity: 0.5;
+        }
+
+        .wcard[data-lv="1"]::before {
+            background: #6060f8;
+        }
+
+        .wcard[data-lv="2"]::before {
+            background: #a050b0;
+        }
+
+        .wcard[data-lv="3"]::before {
+            background: #c04040;
+        }
+
+        .wcard[data-lv="4"]::before {
+            background: #ff2050;
+        }
+
+        .wcard:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(-2px);
+        }
+
+        .card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.72rem;
+            color: var(--muted);
+            background: var(--surface2);
+            padding: 0.22rem 0.65rem;
+            border-radius: 50px;
+            margin-bottom: 0.7rem;
+        }
+
+        .card-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .card-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .card-time {
+            font-size: 0.75rem;
+            color: var(--muted);
+            opacity: 0.55;
+        }
+
+        .card-reacts {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .react-btn {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 0.3rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Tajawal', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .react-btn:hover {
+            background: rgba(96, 96, 248, 0.1);
+            border-color: rgba(96, 96, 248, 0.3);
+            color: var(--text);
+        }
+
+        .react-btn.done {
+            background: rgba(96, 96, 248, 0.14);
+            border-color: rgba(96, 96, 248, 0.4);
+            color: var(--accent2);
+        }
+
+        .loading-txt {
+            text-align: center;
+            color: var(--muted);
+            padding: 3rem;
+            font-size: 0.95rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .empty-txt {
+            text-align: center;
+            color: var(--muted);
+            padding: 3rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+        }
+
+        /* LETTERS */
+        .let-wrap {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem 3rem;
+        }
+
+        .let-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem;
+        }
+
+        .let-to-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .let-to-lbl {
+            font-size: 0.88rem;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .let-to-in {
+            flex: 1;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.55rem 0.9rem;
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            direction: rtl;
+            transition: border-color 0.2s;
+        }
+
+        .let-to-in:focus {
+            border-color: rgba(96, 96, 248, 0.35);
+        }
+
+        .let-to-in::placeholder {
+            color: var(--muted);
+            opacity: 0.45;
+        }
+
+        .let-ta {
+            width: 100%;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.1rem;
+            color: var(--text);
+            font-family: 'Amiri', serif;
+            font-size: 1rem;
+            line-height: 1.9;
+            resize: none;
+            min-height: 185px;
+            outline: none;
+            direction: rtl;
+            transition: border-color 0.2s;
+            margin-bottom: 1rem;
+        }
+
+        .let-ta:focus {
+            border-color: rgba(96, 96, 248, 0.3);
+        }
+
+        .let-ta::placeholder {
+            color: var(--muted);
+            opacity: 0.35;
+            font-style: italic;
+        }
+
+        .let-send {
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(140, 90, 248, 0.3);
+            color: var(--accent2);
+            padding: 0.85rem;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .let-send:hover {
+            background: rgba(96, 96, 248, 0.08);
+            border-color: rgba(140, 90, 248, 0.5);
+        }
+
+        .let-confirm {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .let-confirm .lci {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .let-confirm p {
+            color: var(--muted);
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .buried-section {
+            margin-top: 2.5rem;
+        }
+
+        .buried-title {
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .buried-title::before,
+        .buried-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .bcard {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-bottom: 0.9rem;
+            position: relative;
+            transition: all 0.2s;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        .bcard:hover {
+            border-color: rgba(255, 255, 255, 0.09);
+        }
+
+        .bcard-to {
+            font-size: 0.78rem;
+            color: var(--accent2);
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .bcard-text {
+            font-family: 'Amiri', serif;
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .bcard-stamp {
+            position: absolute;
+            top: 0.9rem;
+            left: 0.9rem;
+            font-size: 1.4rem;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+
+        /* NIGHT */
+        .night-wrap {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem 3rem;
+            text-align: center;
+        }
+
+        .night-qcard {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.2rem 1.8rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .night-qcard::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center top, rgba(96, 96, 248, 0.06), transparent);
+            pointer-events: none;
+        }
+
+        .night-qlbl {
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            color: var(--accent2);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .night-q {
+            font-family: 'Amiri', serif;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .night-in {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.1rem;
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            resize: none;
+            min-height: 110px;
+            outline: none;
+            direction: rtl;
+            text-align: right;
+            transition: border-color 0.2s;
+            margin-bottom: 1.2rem;
+        }
+
+        .night-in:focus {
+            border-color: rgba(96, 96, 248, 0.35);
+        }
+
+        .night-in::placeholder {
+            color: var(--muted);
+            opacity: 0.4;
+        }
+
+        .night-sub {
+            background: linear-gradient(135deg, rgba(32, 32, 72, 0.8), rgba(50, 20, 72, 0.8));
+            border: 1px solid rgba(140, 90, 248, 0.2);
+            color: var(--accent2);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+        }
+
+        .night-sub:hover {
+            border-color: rgba(140, 90, 248, 0.5);
+            box-shadow: 0 0 20px rgba(96, 96, 248, 0.15);
+        }
+
+        .whispers-title {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .whisper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.9rem 1.1rem;
+            font-family: 'Amiri', serif;
+            font-size: 0.98rem;
+            color: var(--muted);
+            line-height: 1.7;
+            transition: all 0.2s;
+            animation: fadeUp 0.4s ease both;
+            text-align: right;
+            margin-bottom: 0.7rem;
+        }
+
+        .whisper:hover {
+            color: var(--text);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* METER */
+        .meter-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem 3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center bottom, rgba(96, 96, 248, 0.05), transparent);
+        }
+
+        .stat-card:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .stat-num {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--accent2);
+            font-family: 'Amiri', serif;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-lbl {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .dist-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .dist-ttl {
+            font-size: 0.88rem;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 1.3rem;
+        }
+
+        .dist-row {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .dist-em {
+            font-size: 1.25rem;
+            width: 1.7rem;
+            text-align: center;
+        }
+
+        .dist-bg {
+            flex: 1;
+            height: 7px;
+            background: var(--surface2);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .dist-bar {
+            height: 100%;
+            border-radius: 50px;
+            transition: width 0.8s ease;
+        }
+
+        .dist-pct {
+            font-size: 0.78rem;
+            color: var(--muted);
+            width: 2.5rem;
+        }
+
+        .hours-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.6rem;
+        }
+
+        .hours-lbl {
+            font-size: 0.88rem;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .hours-bars {
+            display: flex;
+            gap: 0.22rem;
+            align-items: flex-end;
+            height: 70px;
+        }
+
+        .hbar {
+            flex: 1;
+            max-width: 20px;
+            background: var(--surface2);
+            border-radius: 3px 3px 0 0;
+            transition: all 0.5s;
+        }
+
+        .hbar.peak {
+            background: linear-gradient(to top, rgba(200, 20, 70, 0.65), rgba(150, 20, 100, 0.3));
+        }
+
+        .hbar:not(.peak) {
+            background: rgba(96, 96, 248, 0.25);
+        }
+
+        .hours-axis {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.4rem;
+            font-size: 0.68rem;
+            color: var(--muted);
+            direction: ltr;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .foot-q {
+            font-family: 'Amiri', serif;
+            font-size: 1rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .foot-s {
+            font-size: 0.75rem;
+            color: #2a2a4a;
+        }
+
+        /* SOUND */
+        .sound-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 999;
+            transition: all 0.2s;
+        }
+
+        .sound-btn:hover {
+            border-color: rgba(96, 96, 248, 0.4);
+            color: var(--accent2);
+        }
+
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface2);
+            border-radius: 4px;
+        }
+
+        /* VOICE PAIN */
+        .voice-wrap {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem 3rem;
+        }
+
+        .voice-hero {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .voice-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(96, 96, 248, 0.07), transparent);
+            pointer-events: none;
+        }
+
+        .voice-hero-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .voice-hero h3 {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-hero p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 400px;
+            margin: 0 auto 1.8rem;
+        }
+
+        .rec-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, #8b1a2a, #c02040);
+            color: #fff;
+            border: none;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(180, 20, 50, 0.35);
+        }
+
+        .rec-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(200, 20, 60, 0.5);
+        }
+
+        .rec-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .rec-btn.recording {
+            background: linear-gradient(135deg, #6b0a1a, #a01030);
+            animation: recPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes recPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(180, 20, 50, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 60px rgba(220, 20, 60, 0.7);
+            }
+        }
+
+        .countdown-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 1.5rem auto 1rem;
+        }
+
+        .countdown-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .countdown-ring circle {
+            fill: none;
+            stroke-width: 4;
+        }
+
+        .cring-bg {
+            stroke: var(--surface2);
+        }
+
+        .cring-fg {
+            stroke: #c02040;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .countdown-num {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ff4060;
+            font-family: 'Amiri', serif;
+        }
+
+        .rec-status {
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .rec-status.active {
+            color: #ff6080;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .waveform {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            height: 40px;
+            margin: 0.8rem 0;
+        }
+
+        .wave-bar {
+            width: 3px;
+            background: linear-gradient(to top, #c02040, #ff6080);
+            border-radius: 3px;
+            animation: waveAnim 0.8s ease-in-out infinite;
+        }
+
+        @keyframes waveAnim {
+
+            0%,
+            100% {
+                height: 4px;
+                opacity: 0.3;
+            }
+
+            50% {
+                height: 32px;
+                opacity: 1;
+            }
+        }
+
+        .post-rec-preview {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .mini-play {
+            background: rgba(96, 96, 248, 0.15);
+            border: 1px solid rgba(96, 96, 248, 0.3);
+            color: var(--accent2);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .mini-play:hover {
+            background: rgba(96, 96, 248, 0.25);
+        }
+
+        .preview-label {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .post-rec-btns {
+            display: flex;
+            gap: 0.7rem;
+            margin-top: 0.8rem;
+        }
+
+        .btn-delete {
+            flex: 1;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--muted);
+            padding: 0.75rem;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-delete:hover {
+            border-color: rgba(200, 50, 50, 0.4);
+            color: #ff6060;
+        }
+
+        .btn-publish-voice {
+            flex: 2;
+            background: linear-gradient(135deg, #12122a, #22123a);
+            border: 1px solid rgba(140, 90, 248, 0.3);
+            color: var(--accent2);
+            padding: 0.75rem;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-publish-voice:hover {
+            border-color: rgba(140, 90, 248, 0.6);
+            box-shadow: 0 0 20px rgba(96, 96, 248, 0.15);
+        }
+
+        .voice-pain-sel {
+            margin: 1rem 0 0.5rem;
+        }
+
+        .voice-pain-sel p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 0.7rem;
+        }
+
+        .voice-pain-mini {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .vpm {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem 0.9rem;
+            cursor: pointer;
+            font-size: 0.82rem;
+            transition: all 0.2s;
+            color: var(--muted);
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .vpm:hover {
+            border-color: rgba(96, 96, 248, 0.3);
+        }
+
+        .vpm.sel {
+            border-color: var(--accent);
+            background: rgba(96, 96, 248, 0.1);
+            color: var(--accent2);
+        }
+
+        .voice-pub-confirm {
+            text-align: center;
+            padding: 2rem 1rem;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .voice-pub-confirm .vci {
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .voice-pub-confirm p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .voice-pub-confirm strong {
+            color: var(--accent2);
+        }
+
+        .voice-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .vcard {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.4rem;
+            transition: all 0.22s;
+            animation: fadeUp 0.4s ease both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            border-radius: 0 18px 18px 0;
+            opacity: 0.5;
+        }
+
+        .vcard[data-lv="1"]::before {
+            background: #6060f8;
+        }
+
+        .vcard[data-lv="2"]::before {
+            background: #a050b0;
+        }
+
+        .vcard[data-lv="3"]::before {
+            background: #c04040;
+        }
+
+        .vcard[data-lv="4"]::before {
+            background: #ff2050;
+        }
+
+        .vcard:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(-2px);
+        }
+
+        .vcard-top {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .vcard-play {
+            background: linear-gradient(135deg, rgba(96, 96, 248, 0.15), rgba(140, 90, 248, 0.1));
+            border: 1px solid rgba(96, 96, 248, 0.3);
+            color: var(--accent2);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .vcard-play:hover {
+            background: rgba(96, 96, 248, 0.25);
+        }
+
+        .vcard-play.playing {
+            animation: recPulse 1s ease-in-out infinite;
+        }
+
+        .vcard-info {
+            flex: 1;
+        }
+
+        .vcard-name {
+            font-size: 0.85rem;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+            font-weight: 500;
+        }
+
+        .vcard-meta {
+            font-size: 0.72rem;
+            color: var(--muted);
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .vcard-waveform {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 24px;
+            margin-bottom: 0.9rem;
+        }
+
+        .vcard-wbar {
+            border-radius: 2px;
+        }
+
+        .vcard-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .vcard-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.72rem;
+            color: var(--muted);
+            background: var(--surface2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+        }
+
+        .err-msg {
+            background: rgba(180, 30, 30, 0.12);
+            border: 1px solid rgba(220, 50, 50, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            color: #ff8080;
+            font-size: 0.88rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        @media(max-width:580px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-btn {
+                font-size: 0.78rem;
+                padding: 0.35rem 0.55rem;
+            }
+
+            .conf-wrap,
+            .wall-wrap,
+            .let-wrap,
+            .night-wrap,
+            .meter-wrap,
+            .voice-wrap {
+                padding: 0.5rem 0.9rem 3rem;
+            }
+
+            .post-rec-btns {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo" onclick="navigate('landing')">فضفضة</div>
+        <ul class="nav-links">
+            <li><button class="nav-btn active" data-page="landing" onclick="navigate('landing')">الرئيسية</button></li>
+            <li><button class="nav-btn" data-page="confession" onclick="navigate('confession')">فضفض</button></li>
+            <li><button class="nav-btn" data-page="wall" onclick="navigate('wall')">حائط الألم</button></li>
+            <li><button class="nav-btn" data-page="letters" onclick="navigate('letters')">رسائل</button></li>
+            <li><button class="nav-btn" data-page="night" onclick="navigate('night')">ليلة طويلة</button></li>
+            <li><button class="nav-btn" data-page="voice" onclick="navigate('voice')">🎧 صوت الألم</button></li>
+            <li><button class="nav-btn" data-page="meter" onclick="navigate('meter')">مقياس</button></li>
+        </ul>
+    </nav>
+
+    <!-- SOUND TOGGLE -->
+    <button class="sound-btn" id="soundBtn" title="صوت">🔇</button>
+
+    <!-- ==================== LANDING ==================== -->
+    <div class="page landing active" id="page-landing">
+        <p class="eyebrow">مكان آمن · بلا أسماء · بلا أحكام</p>
+        <h1 class="hero-title">لو وصلت هنا…<br /><span>فأنت تعبت.</span></h1>
+        <p class="hero-sub">ومش هنا عشان نصلحك. هنا عشان تتنفس. اكتب اللي جواك وخلّيه يطلع.</p>
+        <button class="btn-primary" onclick="navigate('confession')">ابدأ الفضفضة ←</button>
+        <p class="landing-trust">
+            كل شيء هنا مجهول
+            <span class="tdots">
+                <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
+            </span>
+            لا أسماء، لا حسابات، لا أحكام
+        </p>
+        <footer>
+            <p class="foot-q">"فضفضتك مش ضعف… دي محاولة للبقاء."</p>
+            <p class="foot-s">لو أنت بتقرأ ده… فأنت لسه بتحاول.</p>
+            <p class="foot-s" style="margin-top:1.5rem;color:var(--muted);opacity:0.6;">made by Tony Nabil</p>
+        </footer>
+    </div>
+
+    <!-- ==================== CONFESSION ==================== -->
+    <div class="page" id="page-confession">
+        <div class="sec-header">
+            <span class="sec-tag">غرفة الفضفضة</span>
+            <h2 class="sec-title">قول اللي جواك</h2>
+            <p class="sec-desc">اكتب كأنك بتتكلم لنفسك… محدش هيحاسبك.</p>
+        </div>
+        <div class="conf-wrap">
+            <div id="conf-form">
+                <p class="conf-prompt">اكتب كلام طويل، جملة واحدة، شتيمة، بكاء… أي حاجة.</p>
+                <div class="conf-box">
+                    <textarea class="conf-ta" id="confText" placeholder="اكتب هنا…" maxlength="2000"
+                        oninput="updateCharCount()"></textarea>
+                    <span class="char-c" id="charCount">0 / 2000</span>
+                </div>
+                <p class="pain-label">إيه درجة الألم اللي حاسس بيها دلوقتي؟</p>
+                <div class="pain-opts" id="confPainOpts">
+                    <div class="pain-opt" data-lv="1" onclick="selectPain(this,1,'conf')">
+                        <span class="pain-emoji">😐</span><span class="pain-txt">تعب بسيط</span>
+                    </div>
+                    <div class="pain-opt" data-lv="2" onclick="selectPain(this,2,'conf')">
+                        <span class="pain-emoji">😞</span><span class="pain-txt">حزن</span>
+                    </div>
+                    <div class="pain-opt" data-lv="3" onclick="selectPain(this,3,'conf')">
+                        <span class="pain-emoji">😭</span><span class="pain-txt">اكتئاب شديد</span>
+                    </div>
+                    <div class="pain-opt" data-lv="4" onclick="selectPain(this,4,'conf')">
+                        <span class="pain-emoji">💔</span><span class="pain-txt">انهيار</span>
+                    </div>
+                </div>
+                <button class="pub-btn" id="confSubmitBtn" onclick="submitConf()">🌑 اطلع اللي جواك</button>
+            </div>
+            <div id="conf-confirm" class="pub-confirm" style="display:none;">
+                <div class="ci">🤍</div>
+                <p><strong>تم حفظ كلامك…</strong><br />أنت مش لوحدك.<br />في ناس تانية بتحمل نفس الثقل دلوقتي.</p>
+                <br />
+                <button class="pub-btn" onclick="resetConf()" style="margin-top:0.5rem;">فضفض تاني ↩</button>
+            </div>
+        </div>
+        <footer>
+            <p class="foot-q">"فضفضتك مش ضعف… دي محاولة للبقاء."</p>
+            <p class="foot-s" style="margin-top:1.5rem;color:var(--muted);opacity:0.6;">made by Tony Nabil</p>
+        </footer>
+    </div>
+
+    <!-- ==================== WALL ==================== -->
+    <div class="page" id="page-wall">
+        <div class="sec-header">
+            <span class="sec-tag">حائط الألم</span>
+            <h2 class="sec-title">أصوات بتشبهك</h2>
+            <p class="sec-desc">ناس حقيقية، ألم حقيقي، كلهم مرّوا من هنا.</p>
+        </div>
+        <div class="wall-wrap">
+            <p class="loading-txt" id="wallLoading">…جاري تحميل الأصوات</p>
+            <div class="wall-grid" id="wallGrid"></div>
+        </div>
+        <footer>
+            <p class="foot-q">"فضفضتك مش ضعف… دي محاولة للبقاء."</p>
+            <p class="foot-s" style="margin-top:1.5rem;color:var(--muted);opacity:0.6;">made by Tony Nabil</p>
+        </footer>
+    </div>
+
+    <!-- ==================== LETTERS ==================== -->
+    <div class="page" id="page-letters">
+        <div class="sec-header">
+            <span class="sec-tag">رسائل مش هتتبعت</span>
+            <h2 class="sec-title">قول اللي عمره ما اتقال</h2>
+            <p class="sec-desc">اكتب لشخص في حياتك… أو لنفسك.</p>
+        </div>
+        <div class="let-wrap">
+            <div id="let-form">
+                <div class="let-box">
+                    <div class="let-to-row">
+                        <span class="let-to-lbl">إلى…</span>
+                        <input class="let-to-in" id="letTo" placeholder="شخص سابك، أذاك، مات، أو لنفسك…" />
+                    </div>
+                    <textarea class="let-ta" id="letText" placeholder="اكتب اللي عمرك ما قدرت تقوله…"></textarea>
+                    <button class="let-send" onclick="sendLetter()">إرسال الرسالة 🕊</button>
+                </div>
+            </div>
+            <div id="let-confirm" class="let-confirm" style="display:none;">
+                <div class="lci">✉️</div>
+                <p>"الرسالة لن تصل…<br />لكنها خرجت من قلبك."</p>
+                <br />
+                <button class="let-send" onclick="resetLetter()"
+                    style="max-width:280px;margin:0 auto;display:block;">اكتب رسالة
+                    تانية</button>
+            </div>
+            <div class="buried-section">
+                <div class="buried-title">الرسائل المدفونة</div>
+                <p class="loading-txt" id="letLoading">…جاري تحميل الرسائل</p>
+                <div id="buriedGrid"></div>
+            </div>
+        </div>
+        <footer>
+            <p class="foot-q">"فضفضتك مش ضعف… دي محاولة للبقاء."</p>
+            <p class="foot-s" style="margin-top:1.5rem;color:var(--muted);opacity:0.6;">made by Tony Nabil</p>
+        </footer>
+    </div>
+
+    <!-- ==================== NIGHT ==================== -->
+    <div class="page" id="page-night">
+        <div class="sec-header">
+            <span class="sec-tag">ليلة طويلة</span>
+            <h2 class="sec-title">سؤال الليلة دي</h2>
+            <p class="sec-desc">للناس اللي الليل بيجيب معاه كل حاجة.</p>
+        </div>
+        <div class="night-wrap">
+            <div class="night-qcard">
+                <p class="night-qlbl">السؤال اليومي</p>
+                <h3 class="night-q" id="nightQuestion"></h3>
+            </div>
+            <textarea class="night-in" id="nightAnswer" placeholder="همسة قصيرة…"></textarea>
+            <button class="night-sub" id="nightSubBtn" onclick="submitNight()">اكتب في الظلام 🌙</button>
+            <div class="whispers-title">همسات الليلة دي</div>
+            <p class="loading-txt" id="nightLoading">…</p>
+            <div id="whispersGrid"></div>
+        </div>
+        <footer>
+            <p class="foot-q">"لو أنت بتقرأ ده… فأنت لسه بتحاول."</p>
+            <p class="foot-s" style="margin-top:1.5rem;color:var(--muted);opacity:0.6;">made by Tony Nabil</p>
+        </footer>
+    </div>
+
+    <!-- ==================== VOICE ==================== -->
+    <div class="page" id="page-voice">
+        <div class="sec-header">
+            <span class="sec-tag">🎧 صوت الألم</span>
+            <h2 class="sec-title">لو الكتابة مش كفاية…</h2>
+            <p class="sec-desc">سجل صوتك. مش لازم تقول اسمك. مش لازم حتى تتكلم.</p>
+        </div>
+        <div class="voice-wrap">
+            <!-- Recording widget -->
+            <div class="voice-hero" id="voiceHero">
+                <!-- Idle -->
+                <div id="vPhaseIdle">
+                    <span class="voice-hero-icon">🎙️</span>
+                    <h3>سجل 10 ثواني</h3>
+                    <p>قول اللي جواك… أو ابكي… أو اتنهد بس.<br />ده هيتنشر بشكل مجهول تماماً.</p>
+                    <div class="err-msg" id="vErr" style="display:none;"></div>
+                    <button class="rec-btn" onclick="startRecording()">🎙️ ابدأ التسجيل</button>
+                </div>
+                <!-- Recording -->
+                <div id="vPhaseRec" style="display:none;">
+                    <p class="rec-status active">● بيسجل دلوقتي</p>
+                    <div class="countdown-ring">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle class="cring-bg" cx="60" cy="60" r="50" stroke-dasharray="314.16"
+                                stroke-dashoffset="0" />
+                            <circle class="cring-fg" cx="60" cy="60" r="50" id="cringFg" stroke-dasharray="314.16"
+                                stroke-dashoffset="314.16" />
+                        </svg>
+                        <div class="countdown-num" id="countdownNum">10</div>
+                    </div>
+                    <div class="waveform">
+                        <div class="wave-bar" style="animation-delay:0s"></div>
+                        <div class="wave-bar" style="animation-delay:0.1s"></div>
+                        <div class="wave-bar" style="animation-delay:0.2s"></div>
+                        <div class="wave-bar" style="animation-delay:0.15s"></div>
+                        <div class="wave-bar" style="animation-delay:0.05s"></div>
+                        <div class="wave-bar" style="animation-delay:0.25s"></div>
+                        <div class="wave-bar" style="animation-delay:0.1s"></div>
+                    </div>
+                    <button class="rec-btn" onclick="stopEarly()"
+                        style="margin-top:0.5rem;background:linear-gradient(135deg,#444,#666);">⏹ وقّف التسجيل</button>
+                </div>
+                <!-- Review -->
+                <div id="vPhaseReview" style="display:none;">
+                    <span class="voice-hero-icon" style="font-size:2.5rem;">✅</span>
+                    <h3 style="margin-bottom:1.2rem;">التسجيل جاهز</h3>
+                    <div class="post-rec-preview">
+                        <button class="mini-play" id="miniPlayBtn" onclick="previewPlay()">▶️</button>
+                        <span class="preview-label" id="previewLabel">اسمع تسجيلك الأول</span>
+                    </div>
+                    <div class="voice-pain-sel">
+                        <p>إيه درجة الألم في صوتك؟</p>
+                        <div class="voice-pain-mini" id="voicePainMini">
+                            <button class="vpm" data-lv="1" onclick="selectVoicePain(1)">😐 تعب</button>
+                            <button class="vpm" data-lv="2" onclick="selectVoicePain(2)">😞 حزن</button>
+                            <button class="vpm" data-lv="3" onclick="selectVoicePain(3)">😭 اكتئاب</button>
+                            <button class="vpm" data-lv="4" onclick="selectVoicePain(4)">💔 انهيار</button>
+                        </div>
+                    </div>
+                    <div class="err-msg" id="vErrReview" style="display:none;"></div>
+                    <div class="post-rec-btns">
+                        <button class="btn-delete" onclick="deleteRecording()">🗑️ احذف وسجل تاني</button>
+                        <button class="btn-publish-voice" id="publishVoiceBtn" onclick="publishVoice()">📤 انشر
+                            صوتي</button>
+                    </div>
+                </div>
+                <!-- Published -->
+                <div id="vPhasePublished" style="display:none;" class="voice-pub-confirm">
+                    <div class="vci">🎧</div>
+                    <p><strong>صوتك اتنشر…</strong><br />حد هيسمعك دلوقتي.<br />أنت مش لوحدك.</p>
+                    <br />
+                    <button class="rec-btn" onclick="resetVoice()"
+                        style="margin-top:0.5rem;font-size:0.9rem;padding:0.8rem 1.8rem;">🎙️ سجل تاني</button>
+                </div>
+            </div>
+
+            <!-- Voice list -->
+            <div style="border-top:1px solid var(--border);padding-top:1.8rem;">
+                <div class="buried-title" style="margin-bottom:1.5rem;">أصوات الناس</div>
+                <p class="loading-txt" id="voicesLoading">…جاري تحميل الأصوات</p>
+                <div class="voice-list" id="voiceList"></div>
+            </div>
+        </div>
+        <footer>
+            <p class="foot-q">"فضفضتك مش ضعف… دي محاولة للبقاء."</p>
+            <p class="foot-s" style="margin-top:1.5rem;color:var(--muted);opacity:0.6;">made by Tony Nabil</p>
+        </footer>
+    </div>
+
+    <!-- ==================== METER ==================== -->
+    <div class="page" id="page-meter">
+        <div class="sec-header">
+            <span class="sec-tag">مقياس المجتمع</span>
+            <h2 class="sec-title">إحصائيات الحزن</h2>
+            <p class="sec-desc">الألم منتشر… وأنت مش الوحيد.</p>
+        </div>
+        <div class="meter-wrap">
+            <div class="stats-grid">
+                <div class="stat-card"><span class="stat-num" id="statPosts">0</span><span class="stat-lbl">فضفضة
+                        اتكتبت</span>
+                </div>
+                <div class="stat-card"><span class="stat-num" id="statLetters">0</span><span class="stat-lbl">رسالة
+                        مدفونة</span></div>
+                <div class="stat-card"><span class="stat-num" id="statWhispers">0</span><span class="stat-lbl">همسة في
+                        الظلام</span></div>
+            </div>
+            <div class="dist-card">
+                <p class="dist-ttl">توزيع درجات الألم</p>
+                <div id="painDist"></div>
+            </div>
+            <div class="hours-card">
+                <p class="hours-lbl">متى بتكتب الناس أكتر؟</p>
+                <div class="hours-bars" id="hoursBars"></div>
+                <div class="hours-axis"><span>12ص</span><span>6ص</span><span>12ظ</span><span>6م</span><span>12ص</span>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p class="foot-q">"الحزن منتشر… وأنت مش الوحيد."</p>
+            <p class="foot-s">فضفضتك مش ضعف… دي محاولة للبقاء.</p>
+            <p class="foot-s" style="margin-top:1.5rem;color:var(--muted);opacity:0.6;">made by Tony Nabil</p>
+        </footer>
+    </div>
+
+    <script>
+        // ==================== STORAGE (localStorage) ====================
+        function saveShared(key, value) {
+            try { localStorage.setItem('fadfada_' + key, JSON.stringify(value)); return true; } catch (e) { return false; }
+        }
+        function loadShared(key) {
+            try {
+                const v = localStorage.getItem('fadfada_' + key);
+                return v ? JSON.parse(v) : null;
+            } catch (e) { return null; }
+        }
+        function listShared(prefix) {
+            const keys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const k = localStorage.key(i);
+                if (k && k.startsWith('fadfada_' + prefix)) keys.push(k.replace('fadfada_', ''));
+            }
+            return keys;
+        }
+
+        // ==================== DATA ====================
+        const painEmojis = ['', '😐', '😞', '😭', '💔'];
+        const painLabels = ['', 'تعب بسيط', 'حزن', 'اكتئاب شديد', 'انهيار'];
+        const painLabelsShort = ['', 'تعب', 'حزن', 'اكتئاب', 'انهيار'];
+        const painColors = ['', '#6060f8', '#a050b0', '#c04040', '#ff2050'];
+        const nightQuestions = [
+            "إيه أكتر حاجة وجعاك الليلة دي؟",
+            "إيه اللي نفسك حد يسمعه منك؟",
+            "مين أكتر حد وحشك؟",
+            "هل بتتظاهر إنك كويس؟",
+            "لو قدرت تقول جملة واحدة للناس دلوقتي، إيه هتقولها؟",
+            "إيه اللي بتشيله لوحدك وماحدش عارف بيه؟",
+        ];
+        const reactLabelsWall = { a: ['🤍', 'أنا حاسس بيك'], b: ['🫂', 'مش لوحدك'], c: ['🥀', 'ادعيلي'] };
+        const reactLabelsVoice = { a: ['🤍', 'أنا حاسس بيك'], b: ['🫂', 'مش لوحدك'], c: ['🙏', 'ربنا يخفف عنك'] };
+
+        function timeAgo(ts) {
+            const diff = Date.now() - ts;
+            const m = Math.floor(diff / 60000);
+            if (m < 1) return 'الآن';
+            if (m < 60) return `من ${m} دقيقة`;
+            const h = Math.floor(m / 60);
+            if (h < 24) return `من ${h} ساعة`;
+            return 'أمس';
+        }
+        function randomWave(n = 28) {
+            const bars = [];
+            for (let i = 0; i < n; i++) bars.push(Math.random() * 0.85 + 0.1);
+            return bars;
+        }
+
+        // ==================== NAVIGATION ====================
+        let currentPage = 'landing';
+        function navigate(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            const target = document.getElementById('page-' + page);
+            if (target) { target.classList.add('active'); }
+            const btn = document.querySelector(`.nav-btn[data-page="${page}"]`);
+            if (btn) btn.classList.add('active');
+            currentPage = page;
+            window.scrollTo(0, 0);
+            if (page === 'wall') loadWall();
+            if (page === 'letters') loadLetters();
+            if (page === 'night') loadNight();
+            if (page === 'voice') loadVoices();
+            if (page === 'meter') loadMeter();
+        }
+
+        // ==================== SOUND ====================
+        let soundOn = false;
+        document.getElementById('soundBtn').addEventListener('click', function () {
+            soundOn = !soundOn;
+            this.textContent = soundOn ? '🔊' : '🔇';
+        });
+
+        // ==================== CONFESSION ====================
+        let confPain = null;
+        function updateCharCount() {
+            const t = document.getElementById('confText');
+            document.getElementById('charCount').textContent = t.value.length + ' / 2000';
+        }
+        function selectPain(el, lv, group) {
+            if (group === 'conf') {
+                confPain = lv;
+                document.querySelectorAll('#confPainOpts .pain-opt').forEach(o => o.classList.remove('sel'));
+                el.classList.add('sel');
+            }
+        }
+        function submitConf() {
+            const text = document.getElementById('confText').value.trim();
+            if (!text || !confPain) return;
+            const id = `post:${Date.now()}-${Math.random().toString(36).slice(2)}`;
+            const post = { id, text, pain: confPain, ts: Date.now(), reactions: { a: 0, b: 0, c: 0 } };
+            saveShared(id, post);
+            document.getElementById('conf-form').style.display = 'none';
+            document.getElementById('conf-confirm').style.display = 'block';
+        }
+        function resetConf() {
+            document.getElementById('confText').value = '';
+            document.getElementById('charCount').textContent = '0 / 2000';
+            confPain = null;
+            document.querySelectorAll('#confPainOpts .pain-opt').forEach(o => o.classList.remove('sel'));
+            document.getElementById('conf-form').style.display = 'block';
+            document.getElementById('conf-confirm').style.display = 'none';
+        }
+
+        // ==================== WALL ====================
+        let wallReacted = {};
+        let wallInterval;
+        function loadWall() {
+            document.getElementById('wallLoading').style.display = 'block';
+            document.getElementById('wallGrid').innerHTML = '';
+            const keys = listShared('post:');
+            const items = keys.map(k => loadShared(k)).filter(Boolean).sort((a, b) => b.ts - a.ts);
+            document.getElementById('wallLoading').style.display = 'none';
+            const grid = document.getElementById('wallGrid');
+            if (!items.length) {
+                grid.innerHTML = '<p class="empty-txt">لسه مفيش فضفضات… كن أول واحد.</p>';
+                return;
+            }
+            items.forEach((p, i) => {
+                const div = document.createElement('div');
+                div.className = 'wcard';
+                div.setAttribute('data-lv', p.pain);
+                div.style.animationDelay = `${i * 0.05}s`;
+                div.innerHTML = `
+      <span class="card-badge">${painEmojis[p.pain]} ${painLabels[p.pain]}</span>
+      <p class="card-text">${escapeHtml(p.text)}</p>
+      <div class="card-foot">
+        <span class="card-time">${timeAgo(p.ts)}</span>
+        <div class="card-reacts">
+          ${['a', 'b', 'c'].map(t => `<button class="react-btn${wallReacted[p.id + '-' + t] ? ' done' : ''}" onclick="reactWall('${p.id}','${t}',this)">${reactLabelsWall[t][0]} <span id="wr-${p.id}-${t}">${p.reactions[t] || 0}</span></button>`).join('')}
+        </div>
+      </div>`;
+                grid.appendChild(div);
+            });
+            clearInterval(wallInterval);
+            wallInterval = setInterval(loadWall, 15000);
+        }
+        function reactWall(postId, type, btn) {
+            const key = postId + '-' + type;
+            if (wallReacted[key]) return;
+            wallReacted[key] = true;
+            btn.classList.add('done');
+            const post = loadShared(postId);
+            if (!post) return;
+            post.reactions[type] = (post.reactions[type] || 0) + 1;
+            saveShared(postId, post);
+            const span = document.getElementById(`wr-${postId}-${type}`);
+            if (span) span.textContent = post.reactions[type];
+        }
+
+        // ==================== LETTERS ====================
+        function loadLetters() {
+            document.getElementById('letLoading').style.display = 'block';
+            document.getElementById('buriedGrid').innerHTML = '';
+            const keys = listShared('letter:');
+            const items = keys.map(k => loadShared(k)).filter(Boolean).sort((a, b) => b.ts - a.ts);
+            document.getElementById('letLoading').style.display = 'none';
+            const grid = document.getElementById('buriedGrid');
+            if (!items.length) {
+                grid.innerHTML = '<p class="empty-txt" style="padding:1.5rem;">لسه مفيش رسائل…</p>';
+                return;
+            }
+            items.forEach((l, i) => {
+                const div = document.createElement('div');
+                div.className = 'bcard';
+                div.style.animationDelay = `${i * 0.06}s`;
+                div.innerHTML = `<span class="bcard-stamp">✉</span><div class="bcard-to">إلى ${escapeHtml(l.to)}</div><div class="bcard-text">${escapeHtml(l.text)}</div>`;
+                grid.appendChild(div);
+            });
+        }
+        function sendLetter() {
+            const text = document.getElementById('letText').value.trim();
+            if (!text) return;
+            const to = document.getElementById('letTo').value.trim() || 'شخص';
+            const id = `letter:${Date.now()}-${Math.random().toString(36).slice(2)}`;
+            const letter = { id, to, text, ts: Date.now() };
+            saveShared(id, letter);
+            document.getElementById('let-form').style.display = 'none';
+            document.getElementById('let-confirm').style.display = 'block';
+            loadLetters();
+        }
+        function resetLetter() {
+            document.getElementById('letTo').value = '';
+            document.getElementById('letText').value = '';
+            document.getElementById('let-form').style.display = 'block';
+            document.getElementById('let-confirm').style.display = 'none';
+        }
+
+        // ==================== NIGHT ====================
+        let nightSent = false;
+        function loadNight() {
+            const q = nightQuestions[Math.floor(Date.now() / 86400000) % nightQuestions.length];
+            document.getElementById('nightQuestion').textContent = q;
+            document.getElementById('nightLoading').style.display = 'block';
+            document.getElementById('whispersGrid').innerHTML = '';
+            const keys = listShared('whisper:');
+            const items = keys.map(k => loadShared(k)).filter(Boolean).sort((a, b) => b.ts - a.ts).slice(0, 30);
+            document.getElementById('nightLoading').style.display = 'none';
+            const grid = document.getElementById('whispersGrid');
+            if (!items.length) {
+                grid.innerHTML = '<p class="empty-txt" style="padding:1.5rem;">لسه مفيش همسات… كن أول واحد.</p>';
+                return;
+            }
+            items.forEach((w, i) => {
+                const div = document.createElement('div');
+                div.className = 'whisper';
+                div.style.animationDelay = `${i * 0.06}s`;
+                div.textContent = w.text;
+                grid.appendChild(div);
+            });
+        }
+        function submitNight() {
+            const answer = document.getElementById('nightAnswer').value.trim();
+            if (!answer) return;
+            const id = `whisper:${Date.now()}-${Math.random().toString(36).slice(2)}`;
+            saveShared(id, { id, text: answer, ts: Date.now() });
+            const btn = document.getElementById('nightSubBtn');
+            btn.textContent = '✓ اتحفظت';
+            document.getElementById('nightAnswer').value = '';
+            loadNight();
+            setTimeout(() => { btn.textContent = 'اكتب في الظلام 🌙'; }, 3000);
+        }
+
+        // ==================== VOICE ====================
+        let vPhase = 'idle';
+        let vPain = null;
+        let mediaRec = null;
+        let chunks = [];
+        let countdownTimer = null;
+        let audioBlob = null;
+        let audioURL = null;
+        let previewAudio = null;
+        let previewPlaying = false;
+        let voiceReacted = {};
+        let playingVoiceId = null;
+        let voiceAudios = {};
+        let voicesInterval;
+
+        const circumference = 2 * Math.PI * 50;
+
+        function showVPhase(phase) {
+            ['Idle', 'Rec', 'Review', 'Published'].forEach(p => {
+                document.getElementById('vPhase' + p).style.display = 'none';
+            });
+            document.getElementById('vPhase' + phase).style.display = '';
+        }
+
+        function loadVoices() {
+            document.getElementById('voicesLoading').style.display = 'block';
+            document.getElementById('voiceList').innerHTML = '';
+            const keys = listShared('voice:');
+            const items = keys.map(k => loadShared(k)).filter(Boolean).sort((a, b) => b.ts - a.ts);
+            document.getElementById('voicesLoading').style.display = 'none';
+            const list = document.getElementById('voiceList');
+            if (!items.length) {
+                list.innerHTML = '<p class="empty-txt">لسه مفيش أصوات… كن أول واحد يسجل.</p>';
+                return;
+            }
+            items.forEach((v, i) => {
+                const wave = v.waveform || randomWave(28);
+                const color = painColors[v.pain] || '#6060f8';
+                const div = document.createElement('div');
+                div.className = 'vcard';
+                div.setAttribute('data-lv', v.pain);
+                div.style.animationDelay = `${i * 0.05}s`;
+                const waveBars = wave.map(h => `<div class="vcard-wbar" style="width:3px;height:${Math.round(h * 24)}px;background:rgba(255,255,255,0.1);transition:background 0.3s;"></div>`).join('');
+                div.innerHTML = `
+      <div class="vcard-top">
+        <button class="vcard-play" id="vplay-${v.id}" onclick="playVoice('${v.id}')" data-id="${v.id}">▶️</button>
+        <div class="vcard-info">
+          <div class="vcard-name">${escapeHtml(v.name)}</div>
+          <div class="vcard-meta">
+            <span>${painEmojis[v.pain]} ${painLabels[v.pain]}</span>
+            <span>·</span>
+            <span>⏱ 0:10</span>
+            <span>·</span>
+            <span>${timeAgo(v.ts)}</span>
+          </div>
+        </div>
+      </div>
+      <div class="vcard-waveform" id="vwave-${v.id}">${waveBars}</div>
+      <div class="vcard-foot">
+        <span class="vcard-badge">${painEmojis[v.pain]} ${painLabels[v.pain]}</span>
+        <div class="card-reacts">
+          ${['a', 'b', 'c'].map(t => `<button class="react-btn${voiceReacted[v.id + '-' + t] ? ' done' : ''}" onclick="reactVoiceCard('${v.id}','${t}',this)">${reactLabelsVoice[t][0]} <span id="vr-${v.id}-${t}">${v.reactions[t] || 0}</span></button>`).join('')}
+        </div>
+      </div>`;
+                list.appendChild(div);
+            });
+            clearInterval(voicesInterval);
+            voicesInterval = setInterval(loadVoices, 20000);
+        }
+
+        function playVoice(id) {
+            // Stop any currently playing
+            if (playingVoiceId && playingVoiceId !== id) {
+                if (voiceAudios[playingVoiceId]) {
+                    voiceAudios[playingVoiceId].pause();
+                    voiceAudios[playingVoiceId].currentTime = 0;
+                }
+                const oldBtn = document.getElementById('vplay-' + playingVoiceId);
+                if (oldBtn) { oldBtn.textContent = '▶️'; oldBtn.classList.remove('playing'); }
+                updateWaveColor(playingVoiceId, false);
+                playingVoiceId = null;
+            }
+            if (playingVoiceId === id) {
+                if (voiceAudios[id]) { voiceAudios[id].pause(); voiceAudios[id].currentTime = 0; }
+                const btn = document.getElementById('vplay-' + id);
+                if (btn) { btn.textContent = '▶️'; btn.classList.remove('playing'); }
+                updateWaveColor(id, false);
+                playingVoiceId = null;
+                return;
+            }
+            const voice = loadShared(id);
+            if (!voice || !voice.audio) return;
+            if (!voiceAudios[id]) {
+                const a = new Audio('data:audio/webm;base64,' + voice.audio);
+                a.onended = () => {
+                    const btn = document.getElementById('vplay-' + id);
+                    if (btn) { btn.textContent = '▶️'; btn.classList.remove('playing'); }
+                    updateWaveColor(id, false);
+                    playingVoiceId = null;
+                };
+                voiceAudios[id] = a;
+            }
+            voiceAudios[id].play().catch(() => { });
+            playingVoiceId = id;
+            const btn = document.getElementById('vplay-' + id);
+            if (btn) { btn.textContent = '⏸'; btn.classList.add('playing'); }
+            const color = (painColors[voice.pain] || '#6060f8');
+            updateWaveColor(id, true, color);
+        }
+
+        function updateWaveColor(id, playing, color) {
+            const waveEl = document.getElementById('vwave-' + id);
+            if (!waveEl) return;
+            waveEl.querySelectorAll('.vcard-wbar').forEach(bar => {
+                bar.style.background = playing
+                    ? `linear-gradient(to top,${color},${color}cc)`
+                    : 'rgba(255,255,255,0.1)';
+            });
+        }
+
+        function reactVoiceCard(vid, type, btn) {
+            const key = vid + '-' + type;
+            if (voiceReacted[key]) return;
+            voiceReacted[key] = true;
+            btn.classList.add('done');
+            const voice = loadShared(vid);
+            if (!voice) return;
+            voice.reactions[type] = (voice.reactions[type] || 0) + 1;
+            saveShared(vid, voice);
+            const span = document.getElementById(`vr-${vid}-${type}`);
+            if (span) span.textContent = voice.reactions[type];
+        }
+
+        async function startRecording() {
+            document.getElementById('vErr').style.display = 'none';
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                chunks = [];
+                let mimeType = 'audio/webm;codecs=opus';
+                if (!MediaRecorder.isTypeSupported(mimeType)) mimeType = 'audio/webm';
+                if (!MediaRecorder.isTypeSupported(mimeType)) mimeType = '';
+                mediaRec = new MediaRecorder(stream, mimeType ? { mimeType } : {});
+                mediaRec.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+                mediaRec.onstop = () => {
+                    stream.getTracks().forEach(t => t.stop());
+                    audioBlob = new Blob(chunks, { type: mediaRec.mimeType || 'audio/webm' });
+                    audioURL = URL.createObjectURL(audioBlob);
+                    previewAudio = null;
+                    showVPhase('Review');
+                };
+                mediaRec.start(100);
+                showVPhase('Rec');
+                let t = 10;
+                document.getElementById('countdownNum').textContent = t;
+                document.getElementById('cringFg').setAttribute('stroke-dashoffset', circumference);
+                countdownTimer = setInterval(() => {
+                    t--;
+                    document.getElementById('countdownNum').textContent = t;
+                    const offset = circumference - ((10 - t) / 10) * circumference;
+                    document.getElementById('cringFg').setAttribute('stroke-dashoffset', offset);
+                    if (t <= 0) { clearInterval(countdownTimer); mediaRec.stop(); }
+                }, 1000);
+            } catch (e) {
+                const err = document.getElementById('vErr');
+                err.textContent = 'مش قادر يوصل للميكروفون. تأكد إنك أديت الإذن للموقع.';
+                err.style.display = 'block';
+            }
+        }
+        function stopEarly() {
+            clearInterval(countdownTimer);
+            if (mediaRec && mediaRec.state !== 'inactive') mediaRec.stop();
+        }
+        function deleteRecording() {
+            if (audioURL) URL.revokeObjectURL(audioURL);
+            audioBlob = null; audioURL = null; previewAudio = null;
+            vPain = null; previewPlaying = false;
+            document.querySelectorAll('#voicePainMini .vpm').forEach(b => b.classList.remove('sel'));
+            showVPhase('Idle');
+        }
+        function previewPlay() {
+            if (!audioURL) return;
+            if (!previewAudio) previewAudio = new Audio(audioURL);
+            if (previewPlaying) {
+                previewAudio.pause();
+                previewAudio.currentTime = 0;
+                previewPlaying = false;
+                document.getElementById('miniPlayBtn').textContent = '▶️';
+                document.getElementById('previewLabel').textContent = 'اسمع تسجيلك الأول';
+            } else {
+                previewAudio.onended = () => {
+                    previewPlaying = false;
+                    document.getElementById('miniPlayBtn').textContent = '▶️';
+                    document.getElementById('previewLabel').textContent = 'اسمع تسجيلك الأول';
+                };
+                previewAudio.play();
+                previewPlaying = true;
+                document.getElementById('miniPlayBtn').textContent = '⏸';
+                document.getElementById('previewLabel').textContent = 'بيشتغل…';
+            }
+        }
+        function selectVoicePain(lv) {
+            vPain = lv;
+            document.querySelectorAll('#voicePainMini .vpm').forEach(b => b.classList.remove('sel'));
+            document.querySelector(`#voicePainMini .vpm[data-lv="${lv}"]`).classList.add('sel');
+        }
+        async function publishVoice() {
+            if (!audioBlob || !vPain) {
+                const err = document.getElementById('vErrReview');
+                err.textContent = 'اختار درجة الألم الأول.';
+                err.style.display = 'block';
+                return;
+            }
+            const btn = document.getElementById('publishVoiceBtn');
+            btn.disabled = true;
+            btn.textContent = '…جاري النشر';
+            document.getElementById('vErrReview').style.display = 'none';
+            try {
+                const reader = new FileReader();
+                const b64 = await new Promise((res, rej) => {
+                    reader.onload = () => res(reader.result.split(',')[1]);
+                    reader.onerror = rej;
+                    reader.readAsDataURL(audioBlob);
+                });
+                if (b64.length > 3_500_000) {
+                    const err = document.getElementById('vErrReview');
+                    err.textContent = 'حجم التسجيل كبير جداً. حاول تاني.';
+                    err.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = '📤 انشر صوتي';
+                    return;
+                }
+                const id = `voice:${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+                const num = Math.floor(Math.random() * 900) + 100;
+                const voice = { id, ts: Date.now(), pain: vPain, name: `شخص موجوع #${num}`, audio: b64, waveform: randomWave(28), reactions: { a: 0, b: 0, c: 0 } };
+                saveShared(id, voice);
+                showVPhase('Published');
+            } catch (e) {
+                const err = document.getElementById('vErrReview');
+                err.textContent = 'حصل خطأ في النشر. حاول مرة تانية.';
+                err.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = '📤 انشر صوتي';
+            }
+        }
+        function resetVoice() {
+            deleteRecording();
+            showVPhase('Idle');
+            loadVoices();
+        }
+
+        // ==================== METER ====================
+        function loadMeter() {
+            const pk = listShared('post:');
+            const lk = listShared('letter:');
+            const wk = listShared('whisper:');
+            document.getElementById('statPosts').textContent = pk.length;
+            document.getElementById('statLetters').textContent = lk.length;
+            document.getElementById('statWhispers').textContent = wk.length;
+
+            const posts = pk.map(k => loadShared(k)).filter(Boolean);
+            const dist = [0, 0, 0, 0];
+            posts.forEach(p => { if (p.pain >= 1 && p.pain <= 4) dist[p.pain - 1]++; });
+            const total = dist.reduce((a, b) => a + b, 0) || 1;
+            const distColors = [
+                'linear-gradient(90deg,#5050e8,#8080ff)',
+                'linear-gradient(90deg,#8040a0,#c070d0)',
+                'linear-gradient(90deg,#903030,#c05050)',
+                'linear-gradient(90deg,#bb0035,#ff2055)',
+            ];
+            const distEl = document.getElementById('painDist');
+            distEl.innerHTML = dist.map((v, i) => `
+    <div class="dist-row">
+      <span class="dist-em">${painEmojis[i + 1]}</span>
+      <div class="dist-bg"><div class="dist-bar" style="width:${Math.round((v / total) * 100)}%;background:${distColors[i]}"></div></div>
+      <span class="dist-pct">${Math.round((v / total) * 100)}%</span>
+    </div>`).join('');
+
+            const hourData = [5, 3, 2, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 8, 9, 10, 12, 15, 18, 22, 20, 16];
+            const maxH = Math.max(...hourData);
+            document.getElementById('hoursBars').innerHTML = hourData.map((v, i) =>
+                `<div class="hbar${(i >= 22 || i <= 3) ? ' peak' : ''}" style="height:${Math.round((v / maxH) * 70)}px" title="${i}:00"></div>`
+            ).join('');
+        }
+
+        // ==================== HELPERS ====================
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        // ==================== INIT ====================
+        document.getElementById('nightQuestion').textContent = nightQuestions[Math.floor(Date.now() / 86400000) % nightQuestions.length];
+    </script>
+</body>
+
+</html>
